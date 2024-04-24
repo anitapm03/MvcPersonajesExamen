@@ -1,0 +1,46 @@
+﻿@model List<Personaje>
+
+@{
+    ViewData["Title"] = "Buscador";
+    List<string> series = ViewData["SERIES"] as List<string>;
+}
+<h1>Buscador</h1>
+
+<form method="post">
+    <label>Seleccione la serie:</label>
+    <select name="serie" class="form-control">
+        @foreach(string serie in series)
+        {
+            <option value="@serie">@serie</option>
+        }
+    </select>
+    <br />
+    <button class="btn btn-info">Buscar!</button>
+</form>
+
+@if(Model != null)
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Imagen</th>
+                <th>Serie</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Personaje p in Model)
+            {
+                <tr>
+                    <td>@p.IdPersonaje</td>
+                    <td>@p.Nombre</td>
+                    <td>
+                        <img src="@p.Imagen" style="width:100px;height:100px;"/>
+                    </td>
+                    <td>@p.Serie</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
